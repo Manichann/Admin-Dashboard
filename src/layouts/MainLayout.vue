@@ -1,4 +1,5 @@
 <script setup lang="ts">
+<<<<<<< Updated upstream
 import Navbar from './NavbarLayout.vue'
 </script>
 
@@ -8,3 +9,13 @@ import Navbar from './NavbarLayout.vue'
     </div>
 </template>
 
+=======
+import type { RouterView } from 'vue-router'
+</script>
+
+<template>
+  <main>
+    <RouterView />
+  </main>
+</template>
+>>>>>>> Stashed changes
