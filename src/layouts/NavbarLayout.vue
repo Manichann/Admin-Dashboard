@@ -1,10 +1,38 @@
 <script setup lang="ts">
+import FooterComponent from '@/components/FooterComponent.vue'
+defineProps<{ menus: { to: string; name: string; icon: string }[] }>()
 </script>
 
 <template>
   <div class="h-16 flex justify-between items-center px-5 shadow-sm relative lg:static">
     <div class="flex justify-between items-center">
-      <a href="" class="mr-5"><i class="ri-menu-line text-3xl lg:hidden"></i></a>
+      <div class="drawer lg:hidden">
+        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content flex flex-col items-center justify-center">
+          <label for="my-drawer" class="mr-5 btn btn-ghost drawer-button lg:hidden"
+            ><i class="ri-menu-line text-3xl"></i
+          ></label>
+        </div>
+        <div class="drawer-side z-50 ">
+          <label for="my-drawer" class="drawer-overlay"></label>
+          <!-- <div class="menu p-4 w-80 bg-base-200 text-base-content h-screen">
+            <label for="my-drawer-2" class="bg-base-200 font-bold text-2xl">LOGO</label>
+          </div> -->
+          <ul class="menu p-4 w-80 bg-base-200 text-base-content h-screen">
+            <label for="my-drawer-2" class="bg-base-200 font-bold text-2xl">LOGO</label>
+            <div class="divider"></div>
+            <li v-for="(menu, idx) of menus" :key="idx" class="p-2">
+              <router-link :to="{ name: menu.to }" active-class="active"
+                ><i :class="`${menu.icon}`"></i><span>{{ menu.name }}</span></router-link
+              >
+            </li>
+            <li class="mt-36">
+              <div class="divider"></div>
+              <FooterComponent />
+            </li>
+          </ul>
+        </div>
+      </div>
       <label class="input-group">
         <span><i class="ri-search-line text-xl"></i></span>
         <input type="text" placeholder="Search" class="input w-[10rem] sm:w-[20rem] px-4" />

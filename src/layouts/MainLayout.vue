@@ -22,7 +22,7 @@ const menus = ref<{ to: string; label: string }[]>([
       <SidebarComponent :menus="menus" />
     </div>
     <div class="w-full">
-      <Navbar />
+      <Navbar :menus="menus" />
       <div class="p-6 flex justify-center items-center w-full"><RouterView /></div>
     </div>
   </div>

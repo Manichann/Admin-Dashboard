@@ -6,7 +6,7 @@ defineProps<{ menus: { to: string; name: string; icon: string }[] }>()
 </script>
 
 <template>
-  <div class="drawer lg:drawer-open">
+  <div class="drawer lg:drawer-open hidden lg:flex">
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
     <div class="drawer-side">
       <ul class="menu p-4 w-56 min-h-full bg-base-200 text-lg flex items-center">
