@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
+import { authStore } from '@/stores/auth';
+
+const {authState} = authStore()
 </script>
 
 <template>
@@ -15,30 +19,24 @@
         <ul class="hidden lg:flex lg:items-center absolute lg:static gap-x-6">
           <li>
             <a href="">
-              <i class="ri-inbox-2-line text-3xl flex items-center justify-center">
-                <span class="font-sans block lg:hidden text-base mx-2 lg:mx-0">Inbox</span>
-              </i>
-            </a>
-          </li>
-          <li>
-            <a href="">
               <i class="ri-notification-2-line text-3xl flex items-center justify-center">
-                <span class="font-sans block lg:hidden text-base mx-2 lg:mx-0">Notifications</span>
               </i>
             </a>
           </li>
           <li>
             <a href=""
               ><img
-                src="https://th.bing.com/th/id/R.5b1a7d81d5781ae876c40ef119b50bd6?rik=lAXGksIDSng7lw&pid=ImgRaw&r=0"
-                alt=""
-                class="rounded-full w-8 h-8"
+                :src="`${authState.data.image}`"
+                class="rounded-full object-cover w-8 h-8"
               />
               <div class="block lg:hidden">
-                <div class="text-base font-medium">Phongsavanh Bank</div>
-                <span class="text-sm font-normal">Software Developer</span>
               </div>
             </a>
+          </li>
+          <li>
+            <RouterLink :to="{name: 'login'} ">
+              <i class="ri-logout-box-r-line text-3xl flex items-center justify-center"></i>
+            </RouterLink>
           </li>
         </ul>
       </div>
@@ -52,30 +50,29 @@
         >
           <li>
             <a href="">
-              <i class="ri-inbox-2-line text-2xl flex items-center justify-center">
-                <span class="font-sans block lg:hidden text-base mx-2 lg:mx-0">Inbox</span>
-              </i>
-            </a>
-          </li>
-          <li>
-            <a href="">
               <i class="ri-notification-2-line text-2xl flex items-center justify-center">
                 <span class="font-sans block lg:hidden text-base mx-2 lg:mx-0">Notifications</span>
               </i>
             </a>
           </li>
           <li>
-            <a href=""
+            <a
               ><img
-                src="https://th.bing.com/th/id/R.5b1a7d81d5781ae876c40ef119b50bd6?rik=lAXGksIDSng7lw&pid=ImgRaw&r=0"
-                alt=""
-                class="rounded-full w-8 h-8"
+                :src="`${authState.data.image}`"
+                class="rounded-full object-cover w-8 h-8"
               />
               <div class="block lg:hidden">
-                <div class="text-base font-medium">Phongsavanh Bank</div>
-                <span class="text-sm font-normal">Software Developer</span>
+                <div class="text-base font-medium">{{authState.data.username}}</div>
+                <span class="text-sm font-normal">{{authState.data.role}}</span>
               </div>
             </a>
+          </li>
+          <li>
+            <RouterLink :to="{name: 'login'} ">
+              <i class="ri-logout-box-r-line text-3xl flex items-center justify-center">
+                <span class="font-sans block lg:hidden text-base mx-2 lg:mx-0">Log Out</span>
+              </i>
+            </RouterLink>
           </li>
         </ul>
       </div>

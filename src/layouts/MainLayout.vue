@@ -3,6 +3,9 @@ import { ref } from 'vue'
 import Navbar from './NavbarLayout.vue'
 import SidebarComponent from '@/components/SidebarComponent.vue'
 import { RouterView } from 'vue-router'
+import { authStore } from '@/stores/auth'
+ 
+const {authState, getAuth} = authStore()
 
 const menus = ref<{ to: string; label: string }[]>([
   { to: 'dashboard', name: 'Dashboard', icon: 'ri-home-4-line' },
@@ -14,6 +17,7 @@ const menus = ref<{ to: string; label: string }[]>([
   { to: 'calendar', name: 'Calendar', icon: 'ri-calendar-line' },
   { to: 'setting', name: 'Setting', icon: 'ri-settings-5-line' }
 ])
+await getAuth()
 </script>
 
 <template>
