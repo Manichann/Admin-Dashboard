@@ -1,5 +1,6 @@
 import path from 'path'
 import { createRouter, createWebHistory } from 'vue-router'
+import { RouteName } from './route-name.enum'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,25 +48,25 @@ const router = createRouter({
           path: 'setting',
           component: () => import('@/pages/SettingPage.vue'),
           name: 'setting'
-        },
+        }
       ]
     },
-    { 
-      path: '/login', 
-      component: () => import('@/pages/LoginPage.vue'), 
-      name: 'login' 
+    {
+      path: '/login',
+      component: () => import('@/pages/LoginPage.vue'),
+      name: RouteName.Login
     },
     {
-      path: '/forgot_password',
+      path: '/forgot-password',
       component: () => import('@/pages/ForgotPassword.vue'),
-      name: 'forgot_password'
+      name: RouteName.ForgotPassword
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  if(to.name !== 'login' && !localStorage.getItem('user')) {
-    next({name: 'login'})
+  if (to.name !== 'login' && !localStorage.getItem('user')) {
+    next({ name: 'login' })
   } else {
     next()
   }

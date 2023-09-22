@@ -2,9 +2,10 @@
 import InputText from '@/components/InputText.vue'
 import { RouterLink } from 'vue-router'
 import { useForm } from 'vee-validate'
-import { type LoginForm, loginForm } from '../schema/schema'
+import { type LoginForm, loginForm } from '../schema/login'
 import { onMounted } from 'vue'
 import { authStore } from '../stores/auth'
+import { RouteName } from '../router/route-name.enum'
 
 const { authState, login } = authStore()
 
@@ -45,7 +46,9 @@ const onSubmit = handleSubmit((values) => {
       <InputText name="username" label="username" type="text" placeholder="enter username" />
       <InputText name="password" label="password" type="password" placeholder="enter password" />
       <div class="my-5">
-        <RouterLink :to="{ name: 'forgot_password' }" class="text-red-500">forgot password ?</RouterLink>
+        <RouterLink :to="{ name: RouteName.ForgotPassword }" class="text-red-500"
+          >forgot password ?</RouterLink
+        >
       </div>
       <button
         class="btn bg-blue-500 text-white"
@@ -57,3 +60,4 @@ const onSubmit = handleSubmit((values) => {
     </form>
   </div>
 </template>
+../schema/login

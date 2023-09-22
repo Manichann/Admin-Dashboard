@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import InputText from '@/components/InputText.vue'
 import { useForm } from 'vee-validate'
-import { type LoginForm, loginForm } from '@/schema/schema'
 import { authStore } from '@/stores/auth'
+import { type ForgotPasswordForm, forgotPasswordForm } from '@/schema/forgot-password'
 
 const { authState, forgot } = authStore()
 
-const { handleSubmit, handleReset } = useForm<LoginForm>({ validationSchema: loginForm })
+const { handleSubmit, handleReset } = useForm<ForgotPasswordForm>({
+  validationSchema: forgotPasswordForm
+})
 
 const onSubmit = handleSubmit((values) => {
-  forgot(values), handleReset()
+  forgot(values)
+  handleReset()
 })
 </script>
 
@@ -28,3 +31,4 @@ const onSubmit = handleSubmit((values) => {
     </form>
   </div>
 </template>
+@/schema/login
