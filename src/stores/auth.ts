@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
 import { users, type User } from '../data/user'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { RouteName } from '@/router/route-name.enum'
 
 export interface authState {
@@ -13,6 +13,11 @@ export interface authState {
 export interface LoginForm {
   username: string
   password: string
+}
+
+export interface ResetPassword {
+  password: string
+  newPassword: string
 }
 
 export interface ForgotPassword {
@@ -63,7 +68,21 @@ export const authStore = defineStore('auth-store', () => {
     authState.data = email
     authState.isLoading = false
 
-    push({ name: RouteName.ForgotPassword })
+    push({ name: RouteName.ResetPassword, query: { token: email.email } })
+  }
+
+  function reset(token: string, form: ResetPassword) {
+    authState.isLoading = true
+    const user = users.find((user) => user.email === token)
+    if (!user) {
+      authState.error = 'not found user'
+      return
+    }
+
+    user.password = form.newPassword
+    authState.isLoading = false
+
+    push({ name: RouteName.Login })
   }
 
   function getAuth(): void {
@@ -84,5 +103,5 @@ export const authStore = defineStore('auth-store', () => {
     authState.data = user
     authState.isLoading = false
   }
-  return { authState, login, getAuth, forgot }
+  return { authState, login, getAuth, forgot, reset }
 })
