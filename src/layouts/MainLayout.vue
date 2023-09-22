@@ -7,11 +7,19 @@ import { authStore } from '@/stores/auth'
  
 const {authState, getAuth} = authStore()
 
-const menus = ref<{ to: string; label: string }[]>([
+const menus = ref<
+  { to?: string; name: string; icon: string; sub?: { to: string; name: string; icon: string }[] }[]
+>([
   { to: 'dashboard', name: 'Dashboard', icon: 'ri-home-4-line' },
   { to: 'bookmarks', name: 'Bookmarks', icon: 'ri-bookmark-line' },
-  { to: 'revenue', name: 'Revenue', icon: 'ri-line-chart-line' },
-  { to: 'expenses', name: 'Expenses', icon: 'ri-line-chart-line' },
+  {
+    name: 'Reports',
+    icon: 'ri-line-chart-line',
+    sub: [
+      { to: 'revenue', name: 'Revenue', icon: 'ri-line-chart-line' },
+      { to: 'expenses', name: 'Expenses', icon: 'ri-line-chart-line' }
+    ]
+  },
   { to: 'team', name: 'Team', icon: 'ri-group-line' },
   { to: 'messages', name: 'Messages', icon: 'ri-question-answer-line' },
   { to: 'calendar', name: 'Calendar', icon: 'ri-calendar-line' },
@@ -26,7 +34,7 @@ await getAuth()
       <SidebarComponent :menus="menus" />
     </div>
     <div class="w-full">
-      <Navbar />
+      <Navbar :menus="menus" />
       <div class="p-6 flex justify-center items-center w-full"><RouterView /></div>
     </div>
   </div>
