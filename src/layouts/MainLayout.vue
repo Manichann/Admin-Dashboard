@@ -4,11 +4,19 @@ import Navbar from './NavbarLayout.vue'
 import SidebarComponent from '@/components/SidebarComponent.vue'
 import { RouterView } from 'vue-router'
 
-const menus = ref<{ to: string; label: string }[]>([
+const menus = ref<
+  { to?: string; name: string; icon: string; sub?: { to: string; name: string; icon: string }[] }[]
+>([
   { to: 'dashboard', name: 'Dashboard', icon: 'ri-home-4-line' },
   { to: 'bookmarks', name: 'Bookmarks', icon: 'ri-bookmark-line' },
-  { to: 'revenue', name: 'Revenue', icon: 'ri-line-chart-line' },
-  { to: 'expenses', name: 'Expenses', icon: 'ri-line-chart-line' },
+  {
+    name: 'Reports',
+    icon: 'ri-line-chart-line',
+    sub: [
+      { to: 'revenue', name: 'Revenue', icon: 'ri-line-chart-line' },
+      { to: 'expenses', name: 'Expenses', icon: 'ri-line-chart-line' }
+    ]
+  },
   { to: 'team', name: 'Team', icon: 'ri-group-line' },
   { to: 'messages', name: 'Messages', icon: 'ri-question-answer-line' },
   { to: 'calendar', name: 'Calendar', icon: 'ri-calendar-line' },
