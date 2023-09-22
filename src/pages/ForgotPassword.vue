@@ -47,4 +47,3 @@ const onSubmit = handleSubmit((values) => {
     </form>
   </div>
 </template>
-@/schema/login
