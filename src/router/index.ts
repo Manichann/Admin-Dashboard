@@ -1,4 +1,3 @@
-import path from 'path'
 import { createRouter, createWebHistory } from 'vue-router'
 import { RouteName } from './route-name.enum'
 
@@ -54,19 +53,21 @@ const router = createRouter({
     {
       path: '/login',
       component: () => import('@/pages/LoginPage.vue'),
-      name: RouteName.Login
+      name: RouteName.Login,
+      meta: { public: true }
     },
     {
       path: '/forgot-password',
       component: () => import('@/pages/ForgotPassword.vue'),
-      name: RouteName.ForgotPassword
+      name: RouteName.ForgotPassword,
+      meta: { public: true }
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'login' && !localStorage.getItem('user')) {
-    next({ name: 'login' })
+  if (!to.meta.public && !localStorage.getItem('user')) {
+    next({ name: RouteName.Login })
   } else {
     next()
   }
