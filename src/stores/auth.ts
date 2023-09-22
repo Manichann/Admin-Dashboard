@@ -34,7 +34,7 @@ export const authStore = defineStore('auth-store', () => {
     )
 
     if (!user) {
-      authState.error = 'Invalid Information!'
+      authState.error = 'Warning: Invalid Information!'
       return
     }
 
@@ -56,7 +56,7 @@ export const authStore = defineStore('auth-store', () => {
     const email = users.find((email) => email.email === form.email)
 
     if (!email) {
-      authState.error = 'Invalid Emaill address'
+      authState.error = 'Warning: Invalid Emaill address!'
       return
     }
 
