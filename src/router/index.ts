@@ -1,3 +1,4 @@
+import path from 'path'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -49,7 +50,25 @@ const router = createRouter({
         },
       ]
     },
+    { 
+      path: '/login', 
+      component: () => import('@/pages/LoginPage.vue'), 
+      name: 'login' 
+    },
+    {
+      path: '/forgot_password',
+      component: () => import('@/pages/ForgotPassword.vue'),
+      name: 'forgot_password'
+    }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  if(to.name !== 'login' && !localStorage.getItem('user')) {
+    next({name: 'login'})
+  } else {
+    next()
+  }
 })
 
 export default router
