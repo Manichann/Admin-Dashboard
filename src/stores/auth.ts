@@ -14,6 +14,11 @@ export interface LoginForm {
   password: string
 }
 
+export interface ForgotPassword {
+  email: string
+
+}
+
 export const authStore = defineStore('auth-store', () => {
   const { push } = useRouter()
   const authState = reactive<authState>({
@@ -43,6 +48,18 @@ export const authStore = defineStore('auth-store', () => {
     authState.isLoading = false
 
     push({name: 'dashboard'})
+  }
+
+  function forgot(form: ForgotPassword){
+    authState.isLoading = true
+    const email = users.find((email)=> email.email === form.email)
+
+    if(!email){
+      authState.error = 'Invalid Emaill address'
+      return
+    }
+    authState.data = email
+    authState.isLoading = false
   }
 
   function getAuth(): void {

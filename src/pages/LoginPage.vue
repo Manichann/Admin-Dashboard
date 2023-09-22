@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import InputText from '@/components/InputText.vue'
+import { RouterLink } from 'vue-router'
 import { useForm } from 'vee-validate'
 import { type LoginForm, loginForm } from '../schema/schema'
 import { onMounted } from 'vue'
@@ -42,8 +43,10 @@ const onSubmit = handleSubmit((values) => {
     <form @submit.prevent="onSubmit" class="w-[28rem] rounded-2xl shadow-xl text-center py-10">
       <h1 class="text-3xl font-extrabold">Log in</h1>
       <InputText name="username" label="username" type="text" placeholder="enter username" />
-
       <InputText name="password" label="password" type="password" placeholder="enter password" />
+      <div class="my-5">
+        <RouterLink :to="{ name: 'forgot_password' }" class="text-red-500">forgot password ?</RouterLink>
+      </div>
       <button
         class="btn bg-blue-500 text-white"
         type="submit"
