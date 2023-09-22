@@ -40,9 +40,9 @@ defineProps<{
                     <summary>
                       <i :class="`${menu.icon}`"></i><span>{{ menu.name }}</span>
                     </summary>
-                    <ul tabindex="0" class="flex flex-col gap-y-2 pt-2">
+                    <ul tabindex="0" class="flex flex-col gap-y-2">
                       <li v-for="(item, idx) of menu.sub" :key="idx">
-                        <RouterLink :to="{ name: item.to }"
+                        <RouterLink :to="{ name: item.to }" active-class="active"
                           ><i :class="`${item.icon}`"></i><span>{{ item.name }}</span></RouterLink
                         >
                       </li>
