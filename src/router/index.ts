@@ -62,7 +62,12 @@ const router = createRouter({
           path: 'setting',
           component: () => import('@/pages/SettingPage.vue'),
           name: 'setting'
-        }
+        },
+        {
+          path: '/profile',
+          component: () => import('@/pages/ProfilePage.vue'),
+          name: RouteName.Profile
+        },
       ]
     },
     {
@@ -76,6 +81,7 @@ const router = createRouter({
       component: () => import('@/pages/ResetPassPage.vue'),
       name: RouteName.ResetPassword
     },
+    
     {
       path: '/forgot-password',
       component: () => import('@/pages/ForgotPassword.vue'),

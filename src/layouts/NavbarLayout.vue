@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
-import { authStore } from '@/stores/auth';
+import { RouterLink } from 'vue-router'
+import { authStore } from '@/stores/auth'
 
-const {authState} = authStore()
+const { authState } = authStore()
 import FooterComponent from '@/components/FooterComponent.vue'
 defineProps<{
   menus: {
@@ -75,22 +75,17 @@ defineProps<{
         <ul class="hidden lg:flex lg:items-center absolute lg:static gap-x-6">
           <li>
             <a href="">
-              <i class="ri-notification-2-line text-3xl flex items-center justify-center">
-              </i>
+              <i class="ri-notification-2-line text-3xl flex items-center justify-center"> </i>
             </a>
           </li>
           <li>
-            <a href=""
-              ><img
-                :src="`${authState.data.image}`"
-                class="rounded-full object-cover w-8 h-8"
-              />
-              <div class="block lg:hidden">
-              </div>
-            </a>
+            <RouterLink to="profile"
+              ><img :src="`${authState.data.image}`" class="rounded-full object-cover w-8 h-8" />
+              <div class="block lg:hidden"></div>
+            </RouterLink>
           </li>
           <li>
-            <RouterLink :to="{name: 'login'} ">
+            <RouterLink :to="{ name: 'login' }">
               <i class="ri-logout-box-r-line text-3xl flex items-center justify-center"></i>
             </RouterLink>
           </li>
@@ -112,19 +107,16 @@ defineProps<{
             </a>
           </li>
           <li>
-            <a
-              ><img
-                :src="`${authState.data.image}`"
-                class="rounded-full object-cover w-8 h-8"
-              />
+            <RouterLink to="profile"
+              ><img :src="`${authState.data.image}`" class="rounded-full object-cover w-8 h-8" />
               <div class="block lg:hidden">
-                <div class="text-base font-medium">{{authState.data.username}}</div>
-                <span class="text-sm font-normal">{{authState.data.role}}</span>
+                <div class="text-base font-medium">{{ authState.data.username }}</div>
+                <span class="text-sm font-normal">{{ authState.data.role }}</span>
               </div>
-            </a>
+            </RouterLink>
           </li>
           <li>
-            <RouterLink :to="{name: 'login'} ">
+            <RouterLink :to="{ name: 'login' }">
               <i class="ri-logout-box-r-line text-3xl flex items-center justify-center">
                 <span class="font-sans block lg:hidden text-base mx-2 lg:mx-0">Log Out</span>
               </i>
