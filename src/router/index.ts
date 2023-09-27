@@ -34,6 +34,21 @@ const router = createRouter({
           name: 'team'
         },
         {
+          path: 'team/:id',
+          component: () => import('@/pages/TeamDetailPage.vue'),
+          name: 'team.detail'
+        },
+        {
+          path: 'add-user',
+          component: () => import('@/pages/AddUser.vue'),
+          name: RouteName.AddUser
+        },
+        {
+          path: 'edit-user',
+          component: () => import('@/pages/EditUser.vue'),
+          name: RouteName.EditUser
+        },
+        {
           path: 'messages',
           component: () => import('@/pages/MessagesPage.vue'),
           name: 'messages'

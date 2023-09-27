@@ -43,7 +43,7 @@ const onSubmit = handleSubmit((values) => {
     </div>
     <form @submit.prevent="onSubmit" class="w-[28rem] rounded-2xl shadow-xl text-center py-10">
       <h1 class="text-3xl font-extrabold">Log in</h1>
-      <InputText name="username" label="username" type="text" placeholder="enter username" />
+      <InputText name="username" label="username" type="username" placeholder="enter username" />
       <InputText name="password" label="password" type="password" placeholder="enter password" />
       <div class="my-5">
         <RouterLink :to="{ name: RouteName.ForgotPassword }" class="text-red-500"
@@ -60,4 +60,3 @@ const onSubmit = handleSubmit((values) => {
     </form>
   </div>
 </template>
-../schema/login

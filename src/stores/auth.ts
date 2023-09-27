@@ -24,6 +24,21 @@ export interface ForgotPassword {
   email: string
 }
 
+export interface AddUser {
+  id: string
+  username: string
+  email: string
+  role: string
+  password: string
+}
+export interface EditUser {
+  id: string
+  username: string
+  email: string
+  role: string
+  password: string
+}
+
 export const authStore = defineStore('auth-store', () => {
   const { push } = useRouter()
   const authState = reactive<authState>({
@@ -71,6 +86,21 @@ export const authStore = defineStore('auth-store', () => {
     push({ name: RouteName.ResetPassword, query: { token: email.email } })
   }
 
+  function edit(form: EditUser) {
+    authState.isLoading = true
+    const user = users.find((user) => user.id === form.id)
+    if(!user){
+      authState.error = 'not found user'
+      return
+    }
+    
+    user.username = form.username
+    user.role = form.role
+    user.email = form.email
+    user.password = form.password
+    authState.isLoading = false
+  }
+
   function reset(token: string, form: ResetPassword) {
     authState.isLoading = true
     const user = users.find((user) => user.email === token)
@@ -103,5 +133,5 @@ export const authStore = defineStore('auth-store', () => {
     authState.data = user
     authState.isLoading = false
   }
-  return { authState, login, getAuth, forgot, reset }
+  return { authState, login, getAuth, forgot, reset, edit }
 })
