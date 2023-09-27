@@ -4,8 +4,8 @@ import Navbar from './NavbarLayout.vue'
 import SidebarComponent from '@/components/SidebarComponent.vue'
 import { RouterView } from 'vue-router'
 import { authStore } from '@/stores/auth'
- 
-const {authState, getAuth} = authStore()
+
+const { authState, getAuth } = authStore()
 
 const menus = ref<
   { to?: string; name: string; icon: string; sub?: { to: string; name: string; icon: string }[] }[]
@@ -35,7 +35,9 @@ await getAuth()
     </div>
     <div class="w-full">
       <Navbar :menus="menus" />
-      <div class="p-6 flex justify-center items-center w-full"><RouterView /></div>
+      <div class="flex justify-center items-center w-full h-screen">
+        <RouterView />
+      </div>
     </div>
   </div>
 </template>
