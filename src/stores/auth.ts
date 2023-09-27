@@ -124,7 +124,7 @@ export const authStore = defineStore('auth-store', () => {
     push({ name: RouteName.ResetPassword, query: { token: email.email } })
   }
 
-  function edit(form: EditUser) {
+  function editUser(form: EditUser) {
     authState.isLoading = true
     const user = users.find((user) => user.id === form.id)
     if(!user){
@@ -171,6 +171,6 @@ export const authStore = defineStore('auth-store', () => {
     authState.isLoading = false
   }
 
-  return { authState, login, getAuth, forgot, reset, edit, getUser }
+  return { authState, login, getAuth, forgot, reset, edit, getUser,editUser }
 
 })
