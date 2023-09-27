@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { users, type User } from '../data/user'
 import { useRoute, useRouter } from 'vue-router'
 import { RouteName } from '@/router/route-name.enum'
+import { type ProfileForm } from '@/schema/edit-profile'
 
 export interface authState {
   isLoading: boolean
@@ -56,6 +57,43 @@ export const authStore = defineStore('auth-store', () => {
     push({ name: 'dashboard' })
   }
 
+  function edit(form: ProfileForm) {
+    const token = localStorage.getItem('user')
+
+    if (!token) {
+      authState.error = 'not found token'
+      return
+    }
+    const data = JSON.parse(token)
+    const user = users.find((user) => user.id === data.sub)
+    if (!user) {
+      authState.error = 'not found user'
+      return
+    }
+
+    const fileName = form.image?.name
+
+    user.username = form.username
+    user.email = form.email
+    user.role = form.role
+    user.image = fileName as string
+    authState.isLoading = false
+  }
+  function getUser() {
+    const token = localStorage.getItem('user')
+
+    if (!token) {
+      authState.error = 'not found token'
+      return
+    }
+    const data = JSON.parse(token)
+    const user = users.find((user) => user.id === data.sub)
+    authState.data.username = user?.username
+    authState.data.email = user?.email
+    authState.data.role = user?.role
+    authState.data.image = user?.image
+  }
+
   function forgot(form: ForgotPassword) {
     authState.isLoading = true
     const email = users.find((email) => email.email === form.email)
@@ -78,7 +116,6 @@ export const authStore = defineStore('auth-store', () => {
       authState.error = 'not found user'
       return
     }
-
     user.password = form.newPassword
     authState.isLoading = false
 
@@ -103,5 +140,5 @@ export const authStore = defineStore('auth-store', () => {
     authState.data = user
     authState.isLoading = false
   }
-  return { authState, login, getAuth, forgot, reset }
+  return { authState, login, getAuth, forgot, reset, edit, getUser }
 })

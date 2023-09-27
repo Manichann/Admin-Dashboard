@@ -25,7 +25,7 @@ defineProps<{
       <div>
         <ul class="menu min-h-full flex text-xl font-semibold gap-y-4">
           <li v-for="(menu, idx) of menus" :key="idx" tabindex="0">
-            <details v-if="menu.sub && menu.sub?.length > 0" open>
+            <details v-if="menu.sub && menu.sub?.length > 0">
               <summary>
                 <i :class="`${menu.icon}`"></i><span>{{ menu.name }}</span>
               </summary>
@@ -43,10 +43,6 @@ defineProps<{
           </li>
         </ul>
       </div>
-      <footer class="mt-auto sticky bottom-0 w-full bg-base-200 pb-6">
-        <div class="divider"></div>
-        <FooterComponent />
-      </footer>
     </div>
   </div>
 </template>
